@@ -28,7 +28,29 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   //   the filtered image file [!!TIP res.sendFile(filteredpath); might be useful]
 
   /**************************************************************************** */
+  app.get("/filteredimage/", async (req, res) => {
+    let resourceNotFoundMess = "No resource found."
+    let invalidURLMess = "Image URL invalid."
+    let { image_url } = req.query;
+    // Validate image URL
+    if (!image_url || image_url == "") {
+      return res.status(400).send({ message: invalidURLMess });
+    }
 
+    try {
+      let imagePath: string = await filterImageFromURL(req.query.image_url) as string;
+      res.sendFile(imagePath, async (err) => {
+        if (err) {
+          return res.status(201).send({ message: resourceNotFoundMess });
+        } else {
+          await deleteLocalFiles([imagePath]);
+          return res.status(200);
+        }
+      });
+    } catch (e) {
+      return res.status(201).send({ message: resourceNotFoundMess });
+    }
+  });
   //! END @TODO1
   
   // Root Endpoint
