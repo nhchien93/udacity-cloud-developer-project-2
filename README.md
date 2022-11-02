@@ -32,8 +32,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
 Follow the process described in the course to `eb init` a new application and `eb create` a new environment to deploy your image-filter service! Don't forget you can use `eb deploy` to push changes.
 
 ## Usage
-1. Github repository
-
+1. [Github repository](https://github.com/nhchien93/udacity-project-2/tree/main)
 
 2. Screenshot of the elastic beanstalk application dashboard after deployement
 ![](./deployment_screenshots/EB.png)
